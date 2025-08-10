@@ -106,24 +106,96 @@ Time complexity:
 
 
 
+
+
+
+
 Standard Template Library (STL)
 
 STL in C++ is a powerful collection of template classes and functions that provide generic data structures and algorithms.
 
-containers, iterators, algorithms, and function objects.
+containers, iterators, algorithms
 
-I. Containers
+#Three Pillars of STL
 
-    1. Sequence Containers
-    2. Associative Containers
-    3. Unordered Containers
-    4. Container Adapters
-    5. Other Useful Components
+1) containers:
+data structures that stores objects in memory
+
+Category	    Examples	                                    When to Use
+
+Sequence	    vector, list, deque, array, forward_list	    Store elements in a specific order, direct access by position
+Associative	    set, multiset, map, multimap	                Store sorted elements, fast search (O(log n))
+Unordered	    unordered_set, unordered_map, etc.	            Store unsorted elements, fastest average search (O(1))
 
 
-1. Sequence Containers:
+1.1 Sequence Containers
 
-vector<T>:
-    A dynamic array that can grow and shrink in size.
-    Good for scenarios where you add/remove elements from the end (push_back, pop_back).
-    Example: std::vector<int> v = {1, 2, 3};
+*They store elements in the order you insert them and allow you to access elements based on position/index*
+
+Container	    | Key Features	                                                                  | When to Use
+vector	        | Dynamic array (fast random access, elements stored contiguously in memory)      | You know you’ll need fast index-based access and occasional resizing
+list	        | Doubly linked list (fast insertion/removal anywhere, no random access)	      | Many insertions/removals in the middle
+deque	        | Double-ended queue (fast insertion/removal at both ends, random access)         | Need to add/remove from front and back efficiently
+array	        | Fixed-size array (compile-time size, contiguous memory)               	      |  Performance-critical, size known in advance
+forward_list	| Singly linked list (saves memory, forward traversal only)	                      |  Lightweight list with only forward movement
+
+time complexity
+vector:                | Random access O(1), insert/remove at end O(1) amortized, insert/remove in middle O(n)
+list / forward_list:   | No random access, insert/remove anywhere O(1) (with iterator)
+deque:                 | Random access O(1), insert/remove at ends O(1)
+array:                 | Random access O(1)
+
+
+1.2 Associative Containers (key-value)
+
+*They store elements in a sorted order (based on a comparison function, default is <) and allow*
+*logarithmic search using balanced binary trees (usually Red-Black trees).*
+
+
+
+(
+Red-Black Tree?
+
+    Balanced Structure: The self-balancing nature ensures that operations remain efficient even when the tree grows large.
+    Guaranteed Performance: Even in the worst case, operations will always take logarithmic time.
+    Versatile:  Red-Black Trees are commonly used in many real-world applications like:
+                Associative containers in C++ STL (e.g., std::map, std::set).
+                Used in databases and file systems where fast insertion and deletion are crucial.
+
+Other Algorithms with Logarithmic Time Complexity ?
+
+    O(log n) complexity
+
+    Balanced binary search trees (like Red-Black Trees, AVL Trees, etc.): Search, insert, and delete operations can be done in O(log n) time.
+    Heaps: Operations like insertion and deletion in a heap can also be done in logarithmic time.
+    Exponentiation by squaring: Efficient algorithms for raising a number to a power, such as exponentiation by squaring, can be done in logarithmic time.
+)
+
+Container	            Key Features	                                When to Use
+
+set	                    Stores unique sorted elements	                Need a sorted collection with no duplicates
+multiset	            stores sorted elements but allows duplicates	Need sorted order and duplicates allowed
+map	                    Stores key-value pairs, unique keys	            Need fast lookups with sorted keys
+multimap	            Key-value pairs, allows duplicate keys	        Need sorted keys with possible duplicates
+
+Time complexity 
+
+    Search: O(log n)
+    Insert: O(log n)
+    Erase: O(log n)
+
+1.3 Unordered Containers
+
+*They store elements in no particular order but allow very fast average search using a hash table*
+
+Container	            Key Features	                                    When to Use
+unordered_set	        Unique elements, no order, hash-based lookup	    Need fastest possible lookups, no duplicates
+unordered_multiset      Allows duplicates, hash-based	                    Fast lookup with duplicates allowed
+unordered_map	        Key-value pairs, unique keys, hash-based	        Fast key lookups
+unordered_multimap      Key-value pairs, duplicates allowed, hash-based	    Fast key lookups with duplicates
+
+Time complexity 
+
+    Average search: O(1)
+    Worst case: O(n) (if hash collisions are bad)
+    Insert: O(1) average
