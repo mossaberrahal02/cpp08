@@ -1,27 +1,65 @@
 #include "easyfind.hpp"
-#include <iostream>
 #include <vector>
-
+#include <exception>
 
 int main()
 {
-    // std::vector<int> vect;
-    // vect.push_back(11);
-    // vect.push_back(13);
-    // vect.push_back(111);
-    // vect.push_back(133);
-    // std::vector<int>::iterator it;
-    // it = vect.begin();
-    // // while(it != vect.end())
-    // // {
-    // //     std::cout << " " << *it << std::endl;
-    // //     it++;
-    // // }
-
-    // for (it = vect.begin() ; it != vect.end(); it++)
+    {
+        std::vector<int> vec;
+        vec.push_back(1);
+        vec.push_back(2);
+        vec.push_back(3);
+        vec.push_back(4);
+        vec.push_back(5);
+        
+        try {
+            std::vector<int>::const_iterator it = eazyFind(vec, 3);
+            std::cout << "Found element: " << *it << std::endl;
+        }
+        catch (const std::exception& e) {
+            std::cout << "Error: " << e.what() << std::endl;
+        }
+    }
+    std::cout << "---------------------"<< std::endl;
+    {
+        std::vector<int> vec;
+        vec.push_back(1);
+        vec.push_back(2);
+        vec.push_back(3);
+        vec.push_back(4);
+        vec.push_back(5);
+        
+        try {
+            std::vector<int>::const_iterator it = eazyFind(vec, 6);
+            std::cout << "Found element: " << *it << std::endl;
+        }
+        catch (const std::exception& e) {
+            std::cout << "Error: " << e.what() << std::endl;
+        }
+    }
+    std::cout << "---------------------"<< std::endl;
+    {
+        std::vector<int> vec;
+        
+        try {
+            std::vector<int>::const_iterator it = eazyFind(vec, 1);
+            std::cout << "Found element: " << *it << std::endl;
+        }
+        catch (const std::exception& e) {
+            std::cout << "Error: " << e.what() << std::endl;
+        }
+    }
+    std::cout << "---------------------"<< std::endl;
     // {
-    //     std::cout << " " << *it << std::endl;
+    //     const std::vector<int> vec = {1, 2, 3, 4, 5};
+        
+    //     try {
+    //         std::vector<int>::const_iterator it = eazyFind(vec, 4);
+    //         std::cout << "Found element: " << *it << std::endl;
+    //     }
+    //     catch (const std::exception& e) {
+    //         std::cout << "Error: " << e.what() << std::endl;
+    //     }
     // }
-
     return 0;
 }

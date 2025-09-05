@@ -1,17 +1,13 @@
-#ifndef EASYFIND_HPP
-#define EASYFIND_HPP
-
+#pragma once
+#include <iterator>
+#include <iostream>
 #include <algorithm>
-#include <stdexcept>
 
 template <typename T>
-int eazyfind(T & container, int toFind)
+typename T::const_iterator eazyFind(const T &container, int i)
 {
-    T::iterator it = container.begin();
-    for (it = container.begin(); it != container.end(); it++)
-    {
-        return (it.find())
-    }
-    return 0;
+    typename T::const_iterator it = find(container.begin(), container.end(), i);
+    if(it == container.end())
+        throw std::runtime_error("no such element in the container with this value ");
+    return it;
 }
-#endif

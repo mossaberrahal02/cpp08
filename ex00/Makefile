@@ -1,22 +1,17 @@
 NAME = easyfind
-CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-SRCS = main.cpp
-OBJS = $(SRCS:.cpp=.o)
+CXX= c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++11 -fsanitize=address -g3
 
+CPPFILES= ${wildcard *.cpp}
+OFILES=${CPPFILES:.cpp=.o}
 
-all: $(NAME)
+all:${NAME}
 
-$(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
-
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+${NAME}: ${OFILES}
+	${CXX} ${CXXFLAGS} $^ -o $@
 
 clean:
-	rm -f $(OBJS)
-
+	rm -f ${OFILES}
 fclean: clean
-	rm -f $(NAME)
-
+	rm -f ${NAME}
 re: fclean all
