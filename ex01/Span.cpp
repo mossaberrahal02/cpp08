@@ -1,23 +1,26 @@
 #include "Span.hpp"
-
+#include <climits>
 Span::Span(unsigned int n) : N(n) {}
 
-void Span::addNumber(int num) {
+void Span::addNumber(int num) 
+{
     if (numbers.size() >= N) {
         throw std::overflow_error("Cannot add more numbers, Span is full.");
     }
     numbers.push_back(num);
 }
 
-// Template function to add a range of numbers (from iterators)
-template <typename T>
-void Span::addNumbersRange(T first, T last) {
-    for (T it = first; it != last; ++it) {
-        addNumber(*it);
-    }
+void Span::displayContainer()
+{
+    std::vector<int>::iterator it;
+
+    for(it = numbers.begin(); it != numbers.end(); it++)
+        std::cout << *it << " ";
+    std::cout << std::endl;
 }
 
-int Span::shortestSpan() {
+int Span::shortestSpan() 
+{
     if (numbers.size() < 2) {
         throw std::logic_error("Cannot find a span, not enough numbers.");
     }
@@ -35,7 +38,8 @@ int Span::shortestSpan() {
     return shortest;
 }
 
-int Span::longestSpan() {
+int Span::longestSpan() 
+{
     if (numbers.size() < 2) {
         throw std::logic_error("Cannot find a span, not enough numbers.");
     }

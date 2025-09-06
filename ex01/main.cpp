@@ -4,25 +4,31 @@
 
 int main() {
     try {
-        // Test with Span(5)
-        Span sp = Span(5);
-        sp.addNumber(6);
-        sp.addNumber(3);
-        sp.addNumber(17);
+        Span sp = Span(50);
+        sp.displayContainer();
+        sp.addNumber(0);
+        sp.addNumber(1);
+        sp.addNumber(100);
         sp.addNumber(9);
         sp.addNumber(11);
+        sp.displayContainer();
         std::cout << "Shortest Span: " << sp.shortestSpan() << std::endl;  // Expected: 2
         std::cout << "Longest Span: " << sp.longestSpan() << std::endl;    // Expected: 14
 
-        // Test adding numbers from a range
-        std::vector<int> moreNumbers = {1, 5, 12, 17, 25};
+        std::vector<int> moreNumbers;
+        moreNumbers.push_back(43);
+        moreNumbers.push_back(7);
+        moreNumbers.push_back(1);
+        moreNumbers.push_back(0);
+        moreNumbers.push_back(100);
         sp.addNumbersRange(moreNumbers.begin(), moreNumbers.end());
+        sp.displayContainer();
         std::cout << "Shortest Span after adding more numbers: " << sp.shortestSpan() << std::endl;
         std::cout << "Longest Span after adding more numbers: " << sp.longestSpan() << std::endl;
-
-        // Test edge case with only 1 element
         Span sp2(1);
+        sp2.displayContainer();
         sp2.addNumber(10);
+        sp2.displayContainer();
         std::cout << "Shortest Span with 1 element: " << sp2.shortestSpan() << std::endl;
         std::cout << "Longest Span with 1 element: " << sp2.longestSpan() << std::endl;
 
