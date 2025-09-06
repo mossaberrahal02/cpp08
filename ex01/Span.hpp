@@ -10,7 +10,11 @@ class Span {
         unsigned int N;
         std::vector<int> numbers;
     public:
+        Span();
         Span(unsigned int n);
+        Span(const Span &obj);
+        Span &operator=(const Span &obj);
+        ~Span();
 
         void addNumber(int num);
         template <typename T>

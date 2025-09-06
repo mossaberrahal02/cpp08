@@ -1,6 +1,29 @@
 #include "Span.hpp"
 #include <climits>
+
+Span::Span();
 Span::Span(unsigned int n) : N(n) {}
+Span::Span(const Span &obj)
+{
+    N = obj.N;
+    numbers = obj.numbers;
+}
+
+Span::Span &operator=(const Span &obj)
+{
+    if(this != &obj)
+    {
+        N = obj.N;
+        numbers = obj.numbers;
+    }
+    return *this;
+}
+
+Span::~Span()
+{
+
+}
+
 
 void Span::addNumber(int num) 
 {
